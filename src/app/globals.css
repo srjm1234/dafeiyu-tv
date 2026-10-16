@@ -1,0 +1,333 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * 站点语义化配色（RGB 三元组，供 Tailwind 以 <alpha-value> 注入透明度）。
+ * 暗色为默认主题：slate 色板（#0f172a 页面 / #1e293b 面板与卡片 / #334155 边框与标签），
+ * 蓝色 #3b82f6 为唯一强调色，评分金黄、状态橙红仅作点缀。
+ * 浅色为对应的中性冷灰变体，供「浅色」主题使用。
+ */
+:root {
+  --c-page: 247 248 250;           /* #f7f8fa 页面底色（极浅冷灰） */
+  --c-surface: 255 255 255;        /* #ffffff 导航/弹窗底面 */
+  --c-surface-raised: 255 255 255;
+  --c-card: 255 255 255;           /* 卡片纯白 */
+  --c-chip: 243 244 246;           /* #f3f4f6 标签/输入框底 */
+  --c-hover: 235 237 240;          /* 悬停态 */
+  --c-line: 228 231 236;           /* #e4e7ec 1px 细边框 */
+  --c-content: 24 27 31;           /* #181b1f 主文本 */
+  --c-muted: 100 106 115;          /* 次级文本 */
+  --c-faint: 107 114 128;          /* 三级文本（白底 AA 4.5:1） */
+  --c-accent: 59 130 246;          /* #3b82f6 唯一强调色 */
+  --c-accent-hover: 37 99 235;     /* #2563eb */
+  --c-on-accent: 255 255 255;      /* 强调色实心底上的文字 */
+  /* 语义状态色（浅底上取深值，保证对比度） */
+  --c-danger: 220 38 38;
+  --c-danger-hover: 185 28 28;
+  --c-success: 22 163 74;
+  --c-warning: 217 119 6;
+  --c-info: 37 99 235;
+  --c-rating: 245 158 11;
+  /* 实心状态底色（配白字） */
+  --c-danger-solid: 185 28 28;
+  --c-success-solid: 21 128 61;
+  --c-warning-solid: 180 83 9;
+  --c-info-solid: 29 78 216;
+  color-scheme: light;
+}
+
+.dark {
+  /* slate 暗色板：页面最深、面板次之、边框/标签再次，形成清晰的三层层次 */
+  --c-page: 15 23 42;              /* #0f172a 页面底色 */
+  --c-surface: 30 41 59;           /* #1e293b 导航/侧栏/弹窗底面 */
+  --c-surface-raised: 30 41 59;
+  --c-card: 30 41 59;              /* #1e293b 卡片 */
+  --c-chip: 51 65 85;              /* #334155 标签/输入框底 */
+  --c-hover: 51 65 85;             /* 悬停态 */
+  --c-line: 51 65 85;              /* #334155 边框 */
+  --c-content: 248 250 252;        /* #f8fafc 主文本 */
+  --c-muted: 148 163 184;          /* #94a3b8 次级文本 */
+  --c-faint: 100 116 139;          /* #64748b 三级文本 */
+  --c-accent: 59 130 246;          /* #3b82f6 强调色 */
+  --c-accent-hover: 37 99 235;     /* #2563eb */
+  --c-on-accent: 255 255 255;      /* 白字配蓝底 */
+  /* 语义状态色（深底上取中等明度） */
+  --c-danger: 248 113 113;
+  --c-danger-hover: 252 165 165;
+  --c-success: 74 222 128;
+  --c-warning: 251 191 36;
+  --c-info: 96 165 250;
+  --c-rating: 250 204 21;          /* 金黄评分 */
+  --c-danger-solid: 185 28 28;
+  --c-success-solid: 21 128 61;
+  --c-warning-solid: 180 83 9;
+  --c-info-solid: 29 78 216;
+  color-scheme: dark;
+}
+
+/*
+ * 紫罗兰像素主题（pixel）：暗色系变体，配色取自站内像素插画——
+ * 紫罗兰 #8b5cf6 主色 / 粉 #f472b6 辅色，深紫黑底 #0b0817、面板 #14102a、卡片 #1b1535。
+ * 后置于 .dark 声明，同特异性下后规则胜出；html 同时挂 .dark 与 .pixel 两个类。
+ */
+.pixel {
+  --c-page: 11 8 23;               /* #0b0817 页面底色（深紫黑） */
+  --c-surface: 20 16 42;           /* #14102a 导航/侧栏/弹窗底面 */
+  --c-surface-raised: 20 16 42;
+  --c-card: 27 21 53;              /* #1b1535 卡片 */
+  --c-chip: 37 29 71;              /* #251d47 标签/输入框底 */
+  --c-hover: 37 29 71;             /* 悬停态 */
+  --c-line: 48 39 85;              /* #302755 边框 */
+  --c-content: 244 241 251;        /* #f4f1fb 主文本 */
+  --c-muted: 167 159 196;          /* #a79fc4 次级文本 */
+  --c-faint: 113 106 147;          /* #716a93 三级文本 */
+  --c-accent: 139 92 246;          /* #8b5cf6 紫罗兰强调色 */
+  --c-accent-hover: 167 139 250;   /* #a78bfa */
+  --c-on-accent: 255 255 255;      /* 白字配紫底 */
+  /* 语义状态色（深紫底上取明亮值） */
+  --c-danger: 248 113 113;
+  --c-danger-hover: 252 165 165;
+  --c-success: 74 222 128;
+  --c-warning: 251 191 36;
+  --c-info: 167 139 250;
+  --c-rating: 250 204 21;          /* 金黄评分 */
+  --c-danger-solid: 185 28 28;
+  --c-success-solid: 21 128 61;
+  --c-warning-solid: 180 83 9;
+  --c-info-solid: 124 58 237;
+  color-scheme: dark;
+}
+
+/*
+ * 纸质蓝主题（paper）：借鉴「蓝色大肥鱼」手绘涂鸦风——
+ * 24px 网格纸面 + 白纸卡片（2px 墨线 + 硬投影）+ 马克笔蓝 #3d7bd9 强调色，
+ * 正文字体用 Maple Mono CN（等宽，打字机质感，与网格纸面相衬）。
+ * 后置于 .dark / .pixel 声明；html 挂 .paper 类（浅色系，不挂 .dark）。
+ */
+.paper {
+  --c-page: 246 250 253;           /* #f6fafd 纸面底色 */
+  --c-surface: 255 255 255;        /* #ffffff 白纸（导航/弹窗底面） */
+  --c-surface-raised: 255 255 255;
+  --c-card: 255 255 255;           /* 卡片白纸 */
+  --c-chip: 239 246 252;           /* #eff6fc 标签/输入框底（浅蓝） */
+  --c-hover: 226 240 250;          /* #e2f0fa 悬停浅蓝 */
+  --c-line: 207 224 240;           /* #cfe0f0 网格线/细边框 */
+  --c-content: 35 64 107;          /* #23406b 墨色主文本 */
+  --c-muted: 90 116 148;           /* #5a7494 次级文本 */
+  --c-faint: 120 145 175;          /* #7891af 三级文本 */
+  --c-accent: 61 123 217;          /* #3d7bd9 马克笔蓝强调色 */
+  --c-accent-hover: 45 100 190;    /* #2d64be */
+  --c-on-accent: 255 255 255;      /* 白字配蓝底 */
+  /* 语义状态色（浅纸上取深值，保证对比度） */
+  --c-danger: 190 60 60;
+  --c-danger-hover: 160 45 45;
+  --c-success: 22 138 90;
+  --c-warning: 190 120 30;
+  --c-info: 37 99 235;
+  --c-rating: 190 135 25;
+  --c-danger-solid: 185 28 28;
+  --c-success-solid: 21 128 61;
+  --c-warning-solid: 180 83 9;
+  --c-info-solid: 29 78 216;
+  /* 纸质装饰专用变量 */
+  --paper-ink: 35 64 107;          /* 墨线（卡片描边） */
+  --paper-grid: 207 224 240;       /* 网格线 */
+  --paper-shadow: 35 64 107;       /* 硬投影（同墨色，低透明度） */
+  --paper-marker: 184 216 248;     /* 马克笔高亮（标题/站名划记） */
+  color-scheme: light;
+}
+
+html,
+body {
+  @apply bg-page text-content antialiased;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/*
+ * Maple Mono CN（点阵感等宽字体，中文+拉丁+常用符号子集，GB2312 全集）。
+ * 由官方 TTF 子集化而来，见 scripts/subset-maple-font.sh。
+ */
+@font-face {
+  font-family: 'Maple Mono CN';
+  src: url('/fonts/MapleMonoCN-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Maple Mono CN';
+  src: url('/fonts/MapleMonoCN-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 纸质主题正文字体：等宽打字机质感（未覆盖字符回退系统字体） */
+html.paper,
+html.paper body {
+  font-family: 'Maple Mono CN', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/*
+ * 纸质主题装饰层（全部经 html.paper 作用域隔离，不影响其他主题）：
+ * 1) 固定 24px 网格纸面——不随滚动移动；卡片/导航等自有底色会遮住网格，
+ *    形成「白纸贴在格线纸上」的层次；
+ */
+html.paper body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgb(var(--paper-grid) / 0.5) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--paper-grid) / 0.5) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* 2) 白纸卡片：2px 墨线描边 + 硬投影（无模糊，手绘贴纸感）；悬停时投影加深。
+      覆盖三种卡片写法：.card 组件类 / rounded-xl 海报卡 / rounded-2xl 大区块（hero、榜单）。 */
+html.paper .card,
+html.paper .rounded-xl.bg-card.border,
+html.paper .rounded-2xl.bg-card.border {
+  border-width: 2px;
+  border-color: rgb(var(--paper-ink) / 0.85);
+  box-shadow: 3px 3px 0 rgb(var(--paper-shadow) / 0.14);
+}
+html.paper .card:hover,
+html.paper .rounded-xl.bg-card.border:hover,
+html.paper .rounded-2xl.bg-card.border:hover {
+  box-shadow: 4px 4px 0 rgb(var(--paper-shadow) / 0.22);
+}
+
+/* 3) 输入框与按钮：墨线描边 + 白纸底 + 小硬投影（与卡片同一套语言） */
+html.paper .input {
+  background-color: #ffffff;
+  border-width: 1.5px;
+  border-color: rgb(var(--paper-ink) / 0.35);
+}
+html.paper .input:focus {
+  border-color: rgb(var(--c-accent));
+}
+html.paper .btn-ghost {
+  background-color: #ffffff;
+  border-width: 1.5px;
+  border-color: rgb(var(--paper-ink) / 0.35);
+  box-shadow: 2px 2px 0 rgb(var(--paper-shadow) / 0.12);
+}
+html.paper .btn-ghost:hover {
+  box-shadow: 3px 3px 0 rgb(var(--paper-shadow) / 0.18);
+  border-color: rgb(var(--paper-ink) / 0.5);
+}
+html.paper .btn-primary {
+  box-shadow: 2px 2px 0 rgb(var(--paper-shadow) / 0.28);
+}
+html.paper .btn-primary:hover {
+  box-shadow: 3px 3px 0 rgb(var(--paper-shadow) / 0.34);
+}
+
+/* 4) 站名与分区标题：马克笔划记高亮 + 微倾斜（手写标注感） */
+html.paper .brand-name {
+  display: inline-block;
+  transform: rotate(-1.2deg);
+  background-image: linear-gradient(
+    transparent 58%,
+    rgb(var(--paper-marker) / 0.85) 58%,
+    rgb(var(--paper-marker) / 0.85) 92%,
+    transparent 92%
+  );
+}
+html.paper .section-title {
+  display: inline-block;
+  background-image: linear-gradient(
+    transparent 62%,
+    rgb(var(--paper-marker) / 0.7) 62%,
+    rgb(var(--paper-marker) / 0.7) 96%,
+    transparent 96%
+  );
+}
+
+@layer components {
+  .card {
+    @apply bg-card border border-line rounded-xl overflow-hidden transition-all duration-200;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-sm transition-colors disabled:opacity-40 disabled:cursor-not-allowed;
+    /* 统一焦点环：键盘用户可见，与 .input 同一规格 */
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-on-accent hover:bg-accent-hover;
+  }
+  .btn-ghost {
+    @apply btn bg-chip text-muted hover:bg-hover hover:text-content border border-line;
+  }
+  .input {
+    @apply bg-chip border border-line rounded-md px-3 py-2 text-sm text-content placeholder:text-faint;
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:border-accent;
+  }
+  .tag {
+    @apply inline-flex items-center text-xs px-1.5 py-0.5 rounded-full;
+  }
+  /* 小尺寸按钮：定义在 .btn-* 之后，确保尺寸覆盖生效（与 .btn-primary / .btn-ghost 组合使用） */
+  .btn-sm {
+    @apply btn px-2.5 py-1 text-xs;
+  }
+  .btn-xs {
+    @apply btn px-2 py-0.5 text-[11px];
+  }
+  /* 胶囊控件（筛选、分类标签）：统一内边距与圆角 */
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] transition-colors;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-line rounded-full;
+  }
+}
+
+/* 行数截断 */
+.line-clamp-1 { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* 左侧导航抽屉（移动端）：自左缘滑入 */
+@keyframes drawer-in {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+.animate-drawer-in { animation: drawer-in 0.2s ease-out; }
+
+/* 播放器集数激活态 */
+.episode-active {
+  background: rgb(var(--c-accent)) !important;
+  border-color: rgb(var(--c-accent)) !important;
+  color: rgb(var(--c-on-accent)) !important;
+}
+
+/* 品牌字：纯色强调（极简风，不用渐变） */
+.brand-gradient {
+  color: rgb(var(--c-accent));
+}
+
+/* LIVE 呼吸红点（直播页标识） */
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #ef4444;
+  animation: live-breathe 2s ease-in-out infinite;
+}
+@keyframes live-breathe {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+  50% { opacity: 0.55; box-shadow: 0 0 0 4px rgba(239, 68, 68, 0); }
+}
